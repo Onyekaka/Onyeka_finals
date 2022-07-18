@@ -1,0 +1,46 @@
+---
+Name: Onyeka Chukwudozie
+PID: A59011964
+output: pdf_document
+---
+
+load in the different packagaes (ggplot2, lubridate, dplyr)
+```{r}
+library("ggplot2")
+```
+
+```{r}
+library("lubridate")
+```
+
+
+```{r}
+library("dplyr")
+```
+
+load in the CSV data set and assign to Data
+```{r}
+Data <-read.csv("covid19_variants.csv")
+```
+
+Format the date using the function as.Data()
+
+```{r}
+Data$date <-as.Date(Data$date)
+```
+
+Filter the data set
+```{r}
+Data <- Data %>%
+  filter(Data$variant_name !='other' & Data$variant_name != 'Total')
+```
+
+Now we will use ggplot to visualize our data
+```{r}
+ggplot(data = Data, aes(x=date, y=percentage, color=variant_name)) +
+  geom_line() + ggtitle ("covid-19 variants in California") +
+  xlab("Data") + ylab("percentage of sequenced specimens")
+```
+
+
+
